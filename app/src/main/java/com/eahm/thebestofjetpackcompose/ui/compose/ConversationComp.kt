@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.eahm.thebestofjetpackcompose.R
 import com.eahm.thebestofjetpackcompose.domain.model.Message
@@ -24,16 +25,16 @@ import com.eahm.thebestofjetpackcompose.utils.SampleData
 
 
 @Composable
-fun Conversation(messages : List<Message>){
-    LazyColumn{
-        items(messages){ message ->
+fun Conversation(messages: List<Message>) {
+    LazyColumn {
+        items(messages) { message ->
             MessageCard(message)
 
         }
     }
 }
 
-//@Preview
+@Preview
 @Composable
 fun PreviewConversation() {
     TheBestOfJetpackComposeTheme {
@@ -52,6 +53,7 @@ fun MessageCard(msg: Message) {
                 .clip(CircleShape)
                 .border(1.5.dp, MaterialTheme.colors.secondaryVariant, CircleShape)
         )
+
         Spacer(modifier = Modifier.width(8.dp))
 
         // We keep track if the message is expanded or not in this
@@ -59,7 +61,7 @@ fun MessageCard(msg: Message) {
         var isExpanded by remember { mutableStateOf(false) }
 
         val surfaceColor by animateColorAsState(
-            targetValue = if(isExpanded) MaterialTheme.colors.primary else MaterialTheme.colors.surface
+            targetValue = if (isExpanded) MaterialTheme.colors.primary else MaterialTheme.colors.surface
         )
 
         // We toggle the isExpanded variable when we click on this Column
@@ -91,4 +93,15 @@ fun MessageCard(msg: Message) {
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewMessageCard() {
+    MessageCard(
+        msg = Message(
+            author = "Luka",
+            body = "This is a test message",
+        ),
+    )
 }
