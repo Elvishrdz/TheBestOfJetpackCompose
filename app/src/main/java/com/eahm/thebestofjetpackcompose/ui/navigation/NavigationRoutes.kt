@@ -10,14 +10,19 @@ sealed class CodeLabDirections(val route : String){
 
 sealed class UserDirections(val route : String){
 
-    object UserList : UserDirections("user_list")
+    object UserList : UserDirections(viewUserList)
 
-    object UserDetail : UserDirections("user_detail/{userId}/details"){
-        fun createRoute(userId : String) = "user_detail/$userId/details"
+    object UserDetail : UserDirections("$viewUserDetail/{userId}/$viewDetails"){
+        fun createRoute(userId : String) = "$viewUserDetail/$userId/$viewDetails"
     }
-    object UserContact : UserDirections("user_detail/{userId}/contact"){
-        fun createRoute(userId : String) = "user_detail/$userId/contact"
+
+    object UserContact : UserDirections("$viewUserDetail/{userId}/$viewContact"){
+        fun createRoute(userId : String) = "$viewUserDetail/$userId/$viewContact"
     }
 }
 
+private const val viewUserList = "user_list"
+private const val viewUserDetail = "user_detail"
 
+private const val viewDetails = "details"
+private const val viewContact = "contact"
